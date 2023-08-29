@@ -490,4 +490,19 @@ document.addEventListener('keydown', (event) => {
     }, false);
     //Timer event listener
 
-    let myTimer = setInterval(myTimerFnc, 500);
+    //TESTING BLOCK
+    let testPiece = new Block([[5,6],[5,7],[5,8],[5,9],[5,10]],"red",[5,8],5)
+    console.log(testPiece)
+    // for (let ti=0; ti<testPiece.size;ti++){
+    //     let [tx,ty]=testPiece.position[ti]
+    //     console.log(ti)
+    //     ctx.beginPath();
+    //     ctx.lineWidth = "2";
+    //     ctx.strokeStyle = "red";
+    //     ctx.rect(BOX_WIDTH*tx+2, BOX_HEIGHT*ty+2, BOX_WIDTH-4, BOX_HEIGHT-4);
+    //     ctx.fillStyle=testPiece.color
+    //     ctx.fill()
+    // }
+    testPiece.render(pieceCtx,0,.5)
+
+    // let myTimer = setInterval(myTimerFnc, 500);

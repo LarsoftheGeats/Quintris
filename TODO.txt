@@ -1,0 +1,18 @@
+Piece Kick on rotation//Works properly
+Remove top clip//works properly
+game over conditions//Works properly  
+tweak second window display//works properly
+scale speed up as lines drop//works
+debug, get speeds set properly  
+upload and get running natively
+add piece flip
+add power up meter
+add page with commands and rules explanation.  
+add css for game page
+add pause key and command and indicator.    
+add last four pieces maybe?
+fix piece centers
+scale score to speed.  
+scale score to number of completed lines.  
+
+have pieces start randomly on x-axis.  
