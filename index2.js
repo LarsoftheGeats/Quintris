@@ -1,8 +1,8 @@
-var c = document.getElementById("myCanvas");
+var c = window.getElementById("myCanvas");
 var ctx = c.getContext("2d");
-var nextWindow=document.getElementById("nextPiece");
+var nextWindow=window.getElementById("nextPiece");
 var pieceCtx=nextWindow.getContext("2d");
-var playerScore=document.getElementById("scoreArea")
+var playerScore=window.getElementById("scoreArea")
 ctx.fillStyle = "#000000";
 const HEIGHT =4;
 var timeSet=1000;
