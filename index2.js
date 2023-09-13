@@ -1,17 +1,21 @@
-var c = window.getElementById("myCanvas");
+var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
-var nextWindow=window.getElementById("nextPiece");
+var nextWindow=document.getElementById("nextPiece");
 var pieceCtx=nextWindow.getContext("2d");
-var playerScore=window.getElementById("scoreArea")
+var playerScore=document.getElementById("scoreArea")
 ctx.fillStyle = "#000000";
 const HEIGHT =4;
 var timeSet=1000;
 var level=0;
+var pauseButton=document.getElementById("pause")
+var newGameButton=document.getElementById("newGame")
+var pauseFlag=false;
+var gameOnGoingFlag=false;
+const speedGauge = document.querySelector('.gauge')
 
-const COLUMNS=13; 
-const ROWS =25;
-const BOX_WIDTH=46;
-const BOX_HEIGHT=32;
+
+
+
 
 var pieceDictionary = {
     1:[[-1,0],[-1,1],[-1,2],[-1,3],[-1,4]],
@@ -97,14 +101,10 @@ for (let i=0; i<COLUMNS;i++){
     columnsBlock.push([])
 }
 
+intiliaze(c,ctx)
+intiliaze(nextWindow,pieceCtx)
+
 nextPiece()
-function eraseBig(){
-    ctx.clearRect(0,0,c.width, c.height)
-    
-}
-function eraseSmall(){
-    pieceCtx.clearRect(0,0,nextWindow.width, nextWindow.height)
-}
 
 function attach(piece){
     
@@ -126,32 +126,42 @@ function attach(piece){
         columnsBlock[x].push({ypos:y, data:{info:1, color:color}})
         columnsBlock[x].sort((a,b)=>{return b.ypos-a.ypos})
     }//for loop
-    score+=5;//TODO: adjust score by level
     testBoard.set(upload,uploadObj)
     nextState.existingPiece=false;
-    delete Piece.testPiece2
+    testPiece2.flagBottom=true
     let deleteMe=testBoard.rowChecker()
-    cleanRows(deleteMe)
-    if(deleteMe.length>0)
-    {
-        score+=deleteMe.length*5//TODO: scale by level, and triangular numbers * 5.  
-        eraseBig()
-        testBoard.zero()
-        buildState(columnsBlock)
-    }
-
-    playerScore.value=`score: ${score}`
-    testBoard.pieces++
-    let newLevel=(Math.floor(testBoard.pieces/10))
-    if (newLevel>level){
-        timeSet=speedDict[newLevel]
-        level=newLevel
+    let newLevel
+    if (newLevelCheck(testBoard.lines,deleteMe.length)){
+        level++
+        timeSet=speedDict[level]
         clearInterval(myTimer)
         myTimer=setInterval(myTimerFnc,timeSet)
     }
+    if(deleteMe.length>0)
+    {
+        testBoard.lines+=deleteMe.length
+        cleanRows(deleteMe)
+        eraseBig()
+        score+=deleteMe.length*5*(1+level)//TODO: scale by triangular numbers * 5.  
+        testBoard.zero()
+        buildState(columnsBlock)
+    }
+    score+=5*(1+level);
+    playerScore.value=`score: ${score}`
+    testBoard.pieces++
+    setGauge(level*10+(testBoard.lines%8)*1.25)
     console.log(timeSet)
     console.log(testBoard.pieces)
+    console.log(columnsBlock)
     
+}
+
+function newLevelCheck(lines,deleteLines){
+    let lowNum=lines%8;//
+    if (lowNum+deleteLines>=8){
+        return true
+    }
+    return false
 }
 
 function buildState(columnsBlock){
@@ -178,7 +188,7 @@ function buildState(columnsBlock){
   }
 
 function cleanRows (deleteArray){
-    let fallDistance = 1;
+    let fallDistance = 0;
     for (let i = 0; i<columnsBlock.length;i++){
       let deleteIndex=0;
       fallDistance=0;
@@ -228,7 +238,10 @@ function rotate(blockPiece,direction){
     centerCopy[1]=blockPiece.center[1]
     for (let j=0; j<5; j++){
         [y,x]=output[j]
-        if (x<0){            
+        if (x<0){ 
+            if (kickCount===1){
+                return false//already kicked once
+            }           
             output.forEach((a)=>a[1]++)
             centerCopy[1]++
             kickCount++
@@ -290,6 +303,9 @@ function nextPiece(){
 }
 
 function myTimerFnc(){
+    console.log(` ${timeSet}`)
+    if (gameOnGoingFlag===false)
+    {return}
     if (!nextState.existingPiece){
         let newPiece=nextState.nextPiece[0]
         nextState.nextPiece[0]=nextState.nextPiece[1]
@@ -328,6 +344,18 @@ function myTimerFnc(){
     // nextPiece()
 }
 
+function pauseAction(){
+    if(pauseFlag===true){
+        clearInterval(myTimer)
+        myTimer = setInterval(myTimerFnc,timeSet);
+        pauseFlag=false;
+        return
+    }
+    clearInterval(myTimer)
+    pauseFlag=true
+    return
+}
+
 
 testPiece2.render(ctx,0,1)
 testPiece2.render(pieceCtx,0,.5)
@@ -335,11 +363,60 @@ testPiece2.render(pieceCtx,0,.5)
 testBoard= new Board(ROWS, COLUMNS, ctx,c)
 testBoard.render()
 
+function pieceFlip(blockPiece){
+    let offSetY=[]
+    let offSetX=[]
+    let center=blockPiece.center
+    for (let i=0; i<blockPiece.size;i++){
+        offSetX.push(blockPiece.position[i][1]-center[1])
+        offSetY.push(blockPiece.position[i][0]-center[0])
+    }
+    let output = [];
+    let x;
+    let y;
+    console.log(offSetX)
+    console.log(offSetY)
+    console.log(center)
+    for (let i=0; i<blockPiece.size;i++){
+        x=center[1]-offSetX[i]
+        y=center[0]+offSetY[i]
+        output.push([y,x])
+    }
+    for (let j=0; j<5; j++){
+        [y,x]=output[j]
+        if (x<0 || x>COLUMNS-1){
+            return false//TODO potentially add kick
+        }
+    }
+    if (testBoard.clipCheck(output)){
+        return false
+    }
+    blockPiece.setPosition(output)
+    eraseBig()
+    eraseSmall()
+    blockPiece.render(ctx)
+    testBoard.render()
+    nextPiece()
+
+    return
+
+}
+
+
 document.addEventListener('keydown', (event) => {
+    if (testPiece2.flagBottom){return}//gaurd clause.  
+    if (pauseFlag===true){
+        return
+    }//don't move when paused.  
     var name = event.key;
     var code = event.code;
 
     var array=testPiece2.getPosition();
+    console.log(`name ${name} code: ${code}`)
+    if (name==='Control'){
+        console.log("control")
+        pieceFlip(testPiece2)
+    }
     if (name==='ArrowRight'){
         array.forEach((element) => element[1]++)
         if (testBoard.clipCheck(array)===false){
@@ -366,7 +443,13 @@ document.addEventListener('keydown', (event) => {
             testPiece2.render(ctx)
             testBoard.render(ctx)
         }
+        else
+        {attach(testPiece2)
+        eraseBig()
+        testBoard.render()
+        nextPiece()
         }
+    }
     if (code==='ShiftLeft'){
         rotate(testPiece2,"counter")
         eraseBig();
@@ -383,7 +466,42 @@ document.addEventListener('keydown', (event) => {
     }, false);
 
 function endGame(){
-    clearTimeout(myTimer)
+    clearInterval(myTimer)
+    gameOnGoingFlag=false
+    timeSet=1000
 }
 
+function newGame(){
+    if (gameOnGoingFlag===true){
+        return
+    }//sentry
+    gameOnGoingFlag=true;
+    testBoard.zero()
+    testBoard.pieces=0;
+    eraseBig()
+    eraseSmall()
+    clearInterval(myTimer)
+    myTimer = setInterval(myTimerFnc,timeSet);
+    score=0;
+    nextState.nextPiece=[
+        Math.floor(Math.random()*14)+1,
+        Math.floor(Math.random()*14)+1,
+        Math.floor(Math.random()*14)+1]
+        playerScore.value=`score: ${score}`
+}
+
+
+let speedButton=[]
+for (let i=0; i<11;i++){
+    speedButton.push(document.getElementById(`speed${i}`))
+    speedButton[i].addEventListener("click",(event)=>{
+        if (gameOnGoingFlag===true){return}
+        let speed=event.target.getAttribute("data")
+        level=speed
+        timeSet=speedDict[level]
+    })
+
+}
+pauseButton.addEventListener('click',pauseAction)
+newGameButton.addEventListener("click",newGame)
 let myTimer = setInterval(myTimerFnc,timeSet);

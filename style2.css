@@ -1,0 +1,39 @@
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Two columns, first one auto-sized for Element 1, second one takes up the remaining space */
+    grid-template-rows: auto; /* Rows are auto-sized */
+    gap: 10px; /* Adjust the gap between grid items as needed */
+    height: 100vh; /* Make the grid container take up the full viewport height */
+}
+
+.element {
+    background-color: #ccc; /* Change the background color as needed */
+    border: 1px solid #000; /* Add a border for clarity */
+    padding: 10px; /* Add padding for spacing */
+}
+
+.element1 {
+    grid-column: 1; /* Element 1 spans both columns */
+    grid-row: span 4;
+}
+
+.element2 {
+    grid-row: 1; /* Element 2 is in the first row */
+    grid-column: 2; /* Element 2 is in the second column */
+}
+
+.element3 {
+    grid-row: 2; /* Element 3 starts in the second row */
+    grid-column: 2; /* Element 3 is in the second column */
+}
+
+.element4 {
+    grid-row: 3; /* Element 4 starts in the third row */
+    grid-column: 2; /* Element 4 is in the second column */
+}
+
+.element5 {
+    grid-row: 4; /* Element 5 starts in the fourth row */
+    grid-column: 2; /* Element 5 is in the second column */
+}

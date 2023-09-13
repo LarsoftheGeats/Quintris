@@ -16,12 +16,14 @@ class Board {
     rows;
     columns;
     pieces;
-    constructor(rows,columns,context,canvas,pieces=0){
+    lines;
+    constructor(rows,columns,context,canvas,pieces=0,lines=0){
         this.context=context;
         this.c=canvas
         this.rows=rows
         this.columns=columns
         this.pieces=pieces
+        this.lines=lines
         for (let i=0; i<rows; i++){
             let row = new Array(columns).fill(0)
             for (let j=0; j<columns; j++){

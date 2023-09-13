@@ -3,16 +3,27 @@ Remove top clip//works properly
 game over conditions//Works properly  
 tweak second window display//works properly
 scale speed up as lines drop//works
-debug, get speeds set properly  
-upload and get running natively
-add piece flip
+debug, get speeds set properly  //works properly
+upload and get running natively//works properly
+add piece flip//works properly
+add pause key and command and indicator.//works properly    
+add new game button//works properly
+change speed to based on lines.//Works  
+scale score to speed.//works  
+scale score to number of completed lines.  //Works
+add speed selector//works
+fix score if starting at higher speed//works
+add speed meter on css//works
+update speed meter in js//works
+add grid out display for elements//works
+add css for game page//works
+have pieces start randomly on x-axis.  
+add end game text
 add power up meter
 add page with commands and rules explanation.  
-add css for game page
-add pause key and command and indicator.    
 add last four pieces maybe?
 fix piece centers
-scale score to speed.  
-scale score to number of completed lines.  
 
-have pieces start randomly on x-axis.  
+add kick to piece flip maybe?
+fix timeout, clear interval at start, and remove pause flag.  currently i have the timer running and a flag kicking you out of the loop.
+tweak and clean up css view

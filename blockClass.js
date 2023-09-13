@@ -3,6 +3,7 @@ class Piece {
     color;
     center;
     size;
+    flagBottom=false;
     constructor(setup,color,center,size){
         this.size=size;
         let accum="";

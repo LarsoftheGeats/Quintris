@@ -5,12 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="myCanvas" width="600" height="800" style="border:1px solid #000000;"></canvas>
-    <canvas id="nextPiece" width="200" height="200" style="border:1px solid hsl(0, 0%, 0%);"></canvas>
-    <textarea id="scoreArea" width="100" height="40"
-    style="border:1px solid #000000;"> score:0 </textarea>
+    <div class="grid-container">
+        <canvas class="element element1" id="myCanvas" width="600" height="800" style="border:1px solid #000000;"></canvas>
+        <canvas class="element element2" id="nextPiece" width="200" height="200" style="border:1px solid hsl(0, 0%, 0%);"> </canvas>
+        <textarea class="element element3" id="scoreArea" width="100" height="40" style="border:1px solid #000000;"> score:0 </textarea>
+        <div class="element element4">
+            <div id="levelGauge" class="gauge" 
+                style=" --gauge-value:0; width:200px; height:200px;">
+                <div class="ticks">
+                <div class="tithe" style="--gauge-tithe-tick:1;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:2;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:3;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:4;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:6;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:7;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:8;"></div>
+                <div class="tithe" style="--gauge-tithe-tick:9;"></div>
+                <div class="min"></div>
+                <div class="mid"></div>
+                <div class="max"></div>
+            </div>
+                <div class="tick-circle"></div>
+                <div class="needle">
+                    <div class="needle-head"></div>
+                </div>
+                <div class="labels">
+                    <div class="value-label"></div>
+                </div>
+            </div>
+        </div>
+        <div class="element element5">
+            <aside>
+                <button id="speed0" data="0">0</button>
+                <button id="speed1" data="1">1</button>
+                <button id="speed2" data="2">2</button>
+                <button id="speed3" data="3">3</button>
+                <button id="speed4" data="4">4</button>
+                <button id="speed5" data = "5">5</button>
+                <button id="speed6" data="6">6</button>
+                <button id="speed7" data="7">7</button>
+                <button id="speed8" data="8">8</button>
+                <button id="speed9" data="9">9</button>
+                <button id="speed10" data="10">10</button>
+                <button id="pause">pause</button>
+                <button id="newGame">New Game</button>
+            </aside>
+        </div>
+    </div>
+    
+    
+
+
+    <script src="constants.js"></script>
+    <script src="functions.js"></script>
     <script src="board.js"></script>
     <script src="blockClass.js"></script>
     <script src="index2.js"></script>
