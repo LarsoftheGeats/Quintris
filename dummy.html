@@ -10,7 +10,7 @@
 <body>
     <div class="grid-container">
         <div class="element element1">
-        <canvas  id="myCanvas" width="600" height="800" style="border:1px solid #000000;" class="canvas-container"></canvas>
+        <canvas  id="myCanvas" width="600" height="800" style="border:1px solid #000000;"></canvas>
         </div>
         <div class="element element2" >
             <div class="text-display"> Next Piece </div>
@@ -51,24 +51,20 @@
         </div><!--End Element 4 wrapper-->
         <div class="element element5">
             <div class="grid-buttons">
-                <button class = "button0 speed" id="speed0" data="0">0</button>
-                <button class = "button1 speed" id="speed1" data="1">1</button>
-                <button class = "button2 speed" id="speed2" data="2">2</button>
-                <button class = "button3 speed" id="speed3" data="3">3</button>
-                <button class = "button4 speed" id="speed4" data="4">4</button>
-                <button class = "button5 speed" id="speed5" data = "5">5</button>
-                <button class = "button6 speed" id="speed6" data="6">6</button>
-                <button class = "button7 speed" id="speed7" data="7">7</button>
-                <button class = "button8 speed" id="speed8" data="8">8</button>
-                <button class = "button9 speed" id="speed9" data="9">9</button>
-                <button class = "button10 speed" id="speed10" data="10">10</button>
+                <button class = "button0" id="speed0" data="0">0</button>
+                <button class = "button1" id="speed1" data="1">1</button>
+                <button class = "button2" id="speed2" data="2">2</button>
+                <button class = "button3" id="speed3" data="3">3</button>
+                <button class = "button4" id="speed4" data="4">4</button>
+                <button class = "button5" id="speed5" data = "5">5</button>
+                <button class = "button6" id="speed6" data="6">6</button>
+                <button class = "button7" id="speed7" data="7">7</button>
+                <button class = "button8" id="speed8" data="8">8</button>
+                <button class = "button9" id="speed9" data="9">9</button>
+                <button class = "button10" id="speed10" data="10">10</button>
             </div>
-            <div class="utility">
             <button class = "button11" id="pause">pause</button>
-            <button class = "button12 speed" id="newGame">New Game</button>
-            <input type="checkbox" id="showCenter" value="Center">
-            <label for="showCenter">Center</label>
-            </div>
+            <button class = "button12" id="newGame">New Game</button>
         </div><!--End Element 5 wrapper-->
     </div><!--End Grid-->
 
@@ -78,10 +74,7 @@
     <script src="functions.js"></script>
     <script src="index2.js"></script>
 
-    <script>initialize(c,ctx)
-            setup()
-            
-            const button = document.getElementById("myButton");
-    </script>
+    <script>initialize(c,ctx)</script>
+    
 </body>
 </html>

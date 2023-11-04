@@ -17,13 +17,50 @@ add speed meter on css//works
 update speed meter in js//works
 add grid out display for elements//works
 add css for game page//works
-have pieces start randomly on x-axis.  
-add end game text
+TODO clear and reset data at new game errors creep in otherwise.//works
+add page with commands and rules explanation.  //works
+fix piece centers//done works properly
+add all key commands and rules//key commands work
+have pieces start randomly on x-axis.  //works
+create one key piece drop//works
+    get piece width function, maybe left most and right most columns//works
+    check columns for highest point.  //works
+    return high point for all the columns the piece could drop in.//Works
+    need to get the low point for all columns piece could drop in.//works
+    get drop distance.  //works
+    shift piece down //works
+create piece shadow where piece will fall//works
+    add draw shadow to game loop and test.  //works
+create draw boxes function to draw individual boxes and box strokes //works
+make buttons unselectable by cursor (css probably)//actually event.preventDefault() did it.
+clear piece shadow after drop.  it persists for a tick.  //works
+after line clear current piece doesn't erase properly till next tick, fix//works properly 
+add flashing lines for completion pause and restart game timer 
+    draw transparent box on completed lines//works
+    draw flashing boxes on completed lines  //works
+        have timer that turns flash on and off//Works
+    pause timer//works
+fix box shadow so it's always below falling piece  //works properly
+add end game text //works properly
+change initial draw state to be blank until new game pushed//works properly
+set game initialization into a function.//works properly
+make pause unclickable during flash//works properly
+remove enter accidentally pausing.//works properly
+tweak and clean up css view//works will probably always tweak a bit
+draw center function//works
+adjust screen size to view window see functions.js//works, using @media in css
+blank out speed and new game when playing//works
+make pause blink when paused.//works
+make draw center toggleable in options section//works
+fix timeout, clear interval at start, and remove pause flag.  currently i have the timer running and a flag kicking you out of the loop.//works
+
+tweak and clean up css rules
+clean up banners
+add example of line completion and scoring.  rules section
+add to heroku server
+
+
 add power up meter
-add page with commands and rules explanation.  
 add last four pieces maybe?
-fix piece centers
 
 add kick to piece flip maybe?
-fix timeout, clear interval at start, and remove pause flag.  currently i have the timer running and a flag kicking you out of the loop.
-tweak and clean up css view

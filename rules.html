@@ -8,15 +8,45 @@
     <link rel="stylesheet" href="style2.css">
 </head>
 <body>
-    <header >Quintris Rules</header>
-    <div class="grid-container">
-        <div class="element element1"><canvas  id="myCanvas" width="600" height="800" style="border:1px solid #000000;"></canvas></div>
-        <div class="element element2"><canvas  id="nextPiece" width="200" height="200" style="border:1px solid hsl(0, 0%, 0%);"></canvas></div>
-        <div class="element element3">Element 4</div>
-        <div class="element element4">Element 4</div>
-        
-        <div class="element element5">Element 5</div>
-    </div>
+    <header class = "banner">
+        <nav class = "navigation-box">
+            <div class = "wrapper">
+	        <a href="/">Home</a>
+            </div>
+	        <div class = "wrapper"><a href="/pantry.html">Pantry</a></div>
+	        <div class = "wrapper"><a href="/recipes.html">Recipes</a></div>
+	        <div class = "wrapper"><a href="/request.html">Request</a></div>
+	    </nav>
+    </header>
+
+    <section> 
+        <article>
+        <p>Instructions <br>
+            Keys
+            <section class ="card">
+                <canvas id = "clockCanvas" class="demo" style="border:1px solid #000000;"></canvas>
+                <aside>Left Shift and Right Shift rotate the pieces clockwise or counter clockwise, try it here, or use the buttons below to see it happen.  </aside>
+                <button id="spinNewPiece">New Piece</button>
+                <button id="spinCounterClockwise">Counter Clockwise</button>
+                <button id="spinClockWise">Clock Wise</button>
+            </section>
+            <section class ="card">
+                <canvas id = "moveCanvas" class="demo" style="border:1px solid #000000;"></canvas>
+                <aside>Arrow keys move the piece around </aside>
+                <button id="moveNewPiece">New Piece</button>
+                <button id="moveLeft">Move Left</button>
+                <button id="moveRight">Move Right</button>
+                <button id="moveDown">Move Down</button>
+            </section>
+        </p>
+        </article>
+    </section>
+    <script src="constants.js"></script>
+    <script src="blockClass.js"></script>
+    <script src="functions.js"></script>
+    <script src="rules.js"></script>
+    
+
     
 </body>
 </html>
